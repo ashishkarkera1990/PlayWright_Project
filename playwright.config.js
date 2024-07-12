@@ -21,8 +21,8 @@ module.exports = defineConfig({
   /* Opt out of parallel tests on CI. */
   workers: process.env.CI ? 1 : undefined,
   /* Reporter to use. See https://playwright.dev/docs/test-reporters */
-  //reporter: 'html',
-  reporter: [["line"], ["allure-playwright"]],
+  reporter: 'html',
+  //reporter: [["line"], ["allure-playwright"]],
   
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
   use: {
@@ -30,28 +30,30 @@ module.exports = defineConfig({
     // baseURL: 'http://127.0.0.1:3000',
 
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
+    actionTimeout: 10 * 1000,
+    navigationTimeout: 30 * 1000,
     trace: 'on-first-retry',
-    screenshot: "off",
+    screenshot: "on",
     video: "off"
 
   },
 
   /* Configure projects for major browsers */
   projects: [
-    {
-      name: 'chromium',
-      use: { ...devices['Desktop Chrome'] },
-    },
+  //  {
+   //   name: 'chromium',
+   //   use: { ...devices['Desktop Chrome'] },
+   // },
 
     {
-      name: 'firefox',
-      use: { ...devices['Desktop Firefox'] },
+     name: 'firefox',
+     use: { ...devices['Desktop Firefox'] },
     },
 
-    {
-      name: 'webkit',
-      use: { ...devices['Desktop Safari'] },
-    },
+     // {
+     // name: 'webkit',
+    // use: { ...devices['Desktop Safari'] },
+     // },
 
     /* Test against mobile viewports. */
     // {
